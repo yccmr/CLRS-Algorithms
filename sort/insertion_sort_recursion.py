@@ -1,16 +1,6 @@
 # Implementation of insertion sort using recursion
 
-def insertion_sort_recursion(a, r):
-    """
-    Insertion sort a in non-decreasing order using recursion
-
-	Parameters:
-    	- param a: an array of integers
-    	- param r: right boundary index of a
-
-    Returns: N/A
-    """
-
+def insertion_sort_recursion(a, r):     # r: right boundary index of a
     if r == 0:
         return
     else:

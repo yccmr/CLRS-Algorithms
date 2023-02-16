@@ -2,10 +2,8 @@
 
 def merge(l_sorted, r_sorted):
     """ Merge two sorted arrays into one """
-
     all_sorted = []
-    i = 0
-    j = 0
+    i, j = 0, 0
     while i < len(l_sorted) and j < len(r_sorted):
         if l_sorted[i] < r_sorted[j]:
             all_sorted.append(l_sorted[i])
@@ -19,8 +17,6 @@ def merge(l_sorted, r_sorted):
 
 
 def merge_sort(a):
-    """ Merge sort a into non-decreasing order """
-    
     if len(a) == 1:
         return a
     else:

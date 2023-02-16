@@ -5,8 +5,8 @@ def partition(a, l, r):
     Partition a[l..r] based on the last element being the pivot
 
     Parameters:
-    	- l: left boundary (index) of a
-    	- r: right boundary (index) of a
+        - l: left boundary (index) of a
+        - r: right boundary (index) of a
 
     Returns: p such that a[l..p-1] <= a[p] and a[p+1..r] >= a[p]
     """
@@ -22,8 +22,6 @@ def partition(a, l, r):
 
 
 def quick_sort(a, l, r):
-    """ Quick sort a into non-decreasing order """
-
     if l < r:
         q = partition(a, l, r)
         quick_sort(a, l, q-1)

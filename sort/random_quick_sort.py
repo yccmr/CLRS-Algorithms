@@ -2,6 +2,7 @@
 
 import random
 
+
 def random_partition(a, l, r):
     """
     Partition a[l..r] based on the randomly chosen pivot
@@ -27,8 +28,6 @@ def random_partition(a, l, r):
 
 
 def random_quick_sort(a, l, r):
-    """ Random quick sort a into non-decreasing order """
-
     if l < r:
         q = random_partition(a, l, r)
         random_quick_sort(a, l, q-1)
