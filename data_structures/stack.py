@@ -3,6 +3,12 @@
 class Stack:
     def __init__(self):
         self.__elements = []
+	
+	def is_empty(self):
+        return self.__elements == []
+
+    def size(self):
+        return len(self.__elements)	
 
     def push(self, new):
         self.__elements.append(new)
@@ -12,12 +18,9 @@ class Stack:
 
     def peek(self):
         return None if self.is_empty() else self.__elements[-1]
-
-    def is_empty(self):
-        return self.__elements == []
-
-    def size(self):
-        return len(self.__elements)
+	
+	def clear(self):
+		self.__elements = []    # or keep popping
 
     def display(self):
         print(self)
