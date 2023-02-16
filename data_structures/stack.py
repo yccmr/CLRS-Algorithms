@@ -35,33 +35,4 @@ class Stack:
             return result
 
 
-# Some easy tests
-if __name__ == "__main__":
-    # initialize stack
-    stack = Stack()
-    stack.display()
 
-    # initialize students
-    s1 = STU("Jimmy", 100)
-    s2 = STU("Alex", 97)
-    s3 = STU("Miller", 99)
-    s4 = STU("Eddie", 90)
-    s5 = STU("Alisa", 98)
-    students = [s1, s2, s3, s4, s5]
-
-    # Add all
-    for i in range(len(students)):
-        stack.push(students[i])
-    stack.display()
-
-    print("{} is popped".format(stack.pop()))
-    stack.display()
-
-    # Pop all
-    for i in range(4):
-        stack.pop()
-    stack.display()
-
-    # Pop on an empty stack
-    if stack.pop() is None:
-        print("Cannot pop from an empty stack")
