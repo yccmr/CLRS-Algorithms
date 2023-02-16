@@ -26,10 +26,13 @@ class Stack:
         print(self)
 
     def __str__(self):
-        result = "bottom <- "
-        for i in range(len(self.__elements)):
-            result = result + str(self.__elements[i]) + " "
-        return "(empty)" if self.is_empty() else result
+        if self.is_empty():
+            return "(empty)"
+        else:
+            result = "bottom <- "
+            for i in range(len(self.__elements)):
+                result = result + str(self.__elements[i]) + " "
+            return result
 
 
 # Some easy tests
