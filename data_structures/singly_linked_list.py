@@ -33,7 +33,7 @@ class SLinkedList:
         pass
 
     def insert(self, new_node, index):
-        """ Add new_node to the specified position of the list. If index > length, add it at the end of the list """
+        """ Add new_node to the specified position of the list. If index >= length, add it at the end of the list """
         pass
 
     def remove(self, target_node):
