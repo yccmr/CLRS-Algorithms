@@ -1,8 +1,5 @@
 # Implementation of queue
 
-from student import STU
-
-
 class Queue:
     def __init__(self):
         self.__elements = []

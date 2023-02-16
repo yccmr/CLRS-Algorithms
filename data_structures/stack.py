@@ -1,8 +1,5 @@
 # Implementation of stack
 
-from student import STU
-
-
 class Stack:
     def __init__(self):
         self.__elements = []
