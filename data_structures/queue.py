@@ -3,18 +3,21 @@
 class Queue:
     def __init__(self):
         self.__elements = []
+	
+	def is_empty(self):
+        return self.__elements == []
+
+    def size(self):
+        return len(self.__elements)
 
     def enqueue(self, new):
         self.__elements.append(new)
 
     def dequeue(self):
         return None if self.is_empty() else self.__elements.pop(0)
-
-    def is_empty(self):
-        return self.__elements == []
-
-    def size(self):
-        return len(self.__elements)
+	
+	def clear(self):
+		self.__elements = []     # or keep dequeue-ing
 
     def display(self):
         print(self)
