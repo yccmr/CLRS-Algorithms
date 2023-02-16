@@ -3,8 +3,8 @@
 class Queue:
     def __init__(self):
         self.__elements = []
-	
-	def is_empty(self):
+
+    def is_empty(self):
         return self.__elements == []
 
     def size(self):
@@ -15,9 +15,9 @@ class Queue:
 
     def dequeue(self):
         return None if self.is_empty() else self.__elements.pop(0)
-	
-	def clear(self):
-		self.__elements = []     # or keep dequeue-ing
+
+    def clear(self):
+        self.__elements = []     # or keep dequeue-ing
 
     def display(self):
         print(self)
@@ -31,6 +31,5 @@ class Queue:
                 result = result + str(self.__elements[i]) + " "
             result += "<- tail"
             return result
-
 
 
