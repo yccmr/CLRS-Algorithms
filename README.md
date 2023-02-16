@@ -2,7 +2,7 @@
 
 Consists of algorithms and data structures implemented in Python, most of which are covered in the algorithm courses from University of Alberta (CMPUT 175, 204 and 304).
 
-The ones from CMPUT 175 and 204 will hopefully be done by August 2023, while the rest from 304 won't be uploaded until the end of 2024.
+The ones from CMPUT 175 and 204 will hopefully be done by Septemeber 2023, while the rest from 304 won't be uploaded until the end of 2024.
 
 #### Sorting Algorithms (done): 
 
