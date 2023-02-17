@@ -74,11 +74,43 @@ class DLinkedList:
 
     def remove(self, target_data):
         """ Remove the target data from the list, do nothing if it doesn't exist """
-        pass
+        index = self.search(target_data)
+        if index == -1:
+            return
+
+        if self.__length == 1:
+            self.__head = None
+            self.__tail = None
+        elif index == 0:
+            self.__head.get_next().set_prev(None)
+            self.__head = self.__head.get_next()
+        elif index == self.__length-1:
+            self.__tail.get_prev().set_next(None)
+            self.__tail = self.__tail.get_prev()
+        else:    # in the middle
+            current = self.__head
+            for i in range(index):
+                current = current.get_next()
+            current.get_next().set_prev(current.get_prev())
+            current.get_prev().set_next(current.get_next())
+        self.__length -= 1
 
     def pop(self):
         """ Remove and return the last element from the list """
-        pass
+        if self.is_empty():
+            return None
+
+        removed_data = None
+        if self.__length == 1:
+            removed_data = self.__head.get_data()
+            self.__head = None
+            self.__tail = None
+        else:
+            removed_data = self.__tail.get_data()
+            self.__tail.get_prev().set_next(None)
+            self.__tail = self.__tail.get_prev()
+        self.__length -= 1
+        return removed_data
 
     def clear(self):
         while not self.is_empty():
