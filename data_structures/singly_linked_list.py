@@ -120,3 +120,4 @@ class SLinkedList:
             result += str(current.get_data())
             return result
 
+
