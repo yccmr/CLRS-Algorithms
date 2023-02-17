@@ -67,17 +67,14 @@ class SLinkedList:
         index = self.search(target_data)
         if index == -1:
             return
+
         if index == 0:
-            # removed = self.__head
             self.__head = self.__head.get_next()
-            # removed.set_next(None)     # avoid future use
         else:
             current = self.__head
             for i in range(index-1):
                 current = current.get_next()
-            # removed = current.get_next()
             current.set_next(current.get_next().get_next())
-            # removed.set_next(None)     # avoid future use
         self.__length -= 1
 
     def pop(self):
@@ -91,12 +88,9 @@ class SLinkedList:
             self.__head = None
         else:
             current = self.__head
-            previous = None
             while current.get_next() is not None:
-                previous = current
                 current = current.get_next()
             removed_data = current.get_data()
-            previous.set_next(None)     # avoid future use
         self.__length -= 1
         return removed_data
 
