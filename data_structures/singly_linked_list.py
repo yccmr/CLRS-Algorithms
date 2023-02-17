@@ -68,14 +68,14 @@ class SLinkedList:
         if index == -1:
             return
         if index == 0:
-            removed = self.__head
+            # removed = self.__head
             self.__head = self.__head.get_next()
             # removed.set_next(None)     # avoid future use
         else:
             current = self.__head
             for i in range(index-1):
                 current = current.get_next()
-            removed = current.get_next()
+            # removed = current.get_next()
             current.set_next(current.get_next().get_next())
             # removed.set_next(None)     # avoid future use
         self.__length -= 1
