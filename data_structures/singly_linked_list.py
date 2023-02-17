@@ -67,11 +67,10 @@ class SLinkedList:
         index = self.search(target_data)
         if index == -1:
             return
-        elif index == 0:
+        if index == 0:
             removed = self.__head
             self.__head = self.__head.get_next()
             # removed.set_next(None)     # avoid future use
-            self.__length -= 1
         else:
             current = self.__head
             for i in range(index-1):
@@ -79,17 +78,17 @@ class SLinkedList:
             removed = current.get_next()
             current.set_next(current.get_next().get_next())
             # removed.set_next(None)     # avoid future use
-            self.__length -= 1
+        self.__length -= 1
 
     def pop(self):
         """ Remove and return the last element from the list """
         if self.is_empty():
             return None
-        elif self.__length == 1:
+
+        removed_data = None
+        if self.__length == 1:
             removed_data = self.__head.get_data()
             self.__head = None
-            self.__length -= 1
-            return removed_data
         else:
             current = self.__head
             previous = None
@@ -98,8 +97,8 @@ class SLinkedList:
                 current = current.get_next()
             removed_data = current.get_data()
             previous.set_next(None)     # avoid future use
-            self.__length -= 1
-            return removed_data
+        self.__length -= 1
+        return removed_data
 
     def clear(self):
         while not self.is_empty():
