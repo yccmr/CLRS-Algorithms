@@ -18,4 +18,4 @@ The ones from CMPUT 175 and 204 will hopefully be done by Septemeber 2023, while
 
 - stack 
 - queue
-- singly linked list
+- singly & doubly linked list
