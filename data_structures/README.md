@@ -2,4 +2,4 @@
 
 - stack
 - queue
-
+- singly linked list
