@@ -17,13 +17,10 @@ class Node:
     def set_next(self, new_next):
         self.__next = new_next
 
-    def __eq__(self, other):
-        return self.__data == other.get_data()
-
 
 class SLinkedList:
-    def __init__(self):
-        self.__head = None
+    def __init__(self, head=None):
+        self.__head = head
         self.__length = 0
 
     def is_empty(self):
@@ -32,32 +29,81 @@ class SLinkedList:
     def length(self):
         return self.__length
 
-    def search(self, target_node):
-        """ Return the index of the target_node. Return -1 if it doesn't exist """
-        pass
+    def search(self, target_data):
+        """ Return the index of the target_data, return -1 if it doesn't exist """
+        index = 0
+        current = self.__head
+        while current is not None:
+            if current.get_data() == target_data:
+                return index
+            current = current.get_next()
+            index += 1
+        return -1
 
-    def add(self, new_node):
-        """ Add new_node at the head of the list """
-        pass
+    def add(self, new_data):
+        """ Add new_data at the head of the list """
+        new_node = Node(new_data)
+        if self.is_empty():
+            self.__head = new_node
+        else:
+            new_node.set_next(self.__head)
+            self.__head = new_node
+        self.__length += 1
 
-    def append(self, new_node):
-        """ Append new_node to the end of the list """
-        pass
+    def append(self, new_data):
+        """ Append new_data to the end of the list """
+        new_node = Node(new_data)
+        if self.is_empty():
+            self.__head = new_node
+        else:
+            current = self.__head
+            while current.get_next() is not None:
+                current = current.get_next()
+            current.set_next(new_node)
+        self.__length += 1
 
-    def insert(self, new_node, index):
-        """ Add new_node to the specified position of the list. If index >= length, append it at the end of the list """
-        pass
-
-    def remove(self, target_node):
-        """ Remove the target node from the list, do nothing if it doesn't exist """
-        pass
+    def remove(self, target_data):
+        """ Remove the target data from the list, do nothing if it doesn't exist """
+        index = self.search(target_data)
+        if index == -1:
+            return
+        elif index == 0:
+            self.__length -= 1
+            removed = self.__head
+            self.__head = self.__head.get_next()
+            removed.set_next(None)     # avoid future use
+        else:
+            self.__length -= 1
+            current = self.__head
+            for i in range(index-1):
+                current = current.get_next()
+            removed = current.get_next()
+            current.set_next(current.get_next().get_next())
+            removed.set_next(None)     # avoid future use
 
     def pop(self):
-        """ Remove the last element from the list """
-        pass
+        """ Remove and return the last element from the list """
+        if self.is_empty():
+            return None
+        elif self.__length == 1:
+            removed_data = self.__head.get_data()
+            self.__head = None
+            self.__length -= 1
+            return removed_data
+        else:
+            current = self.__head
+            previous = None
+            while current.get_next() is not None:
+                previous = current
+                current = current.get_next()
+            removed_data = current.get_data()
+            previous.set_next(None)
+            self.__length -= 1
+            return removed_data
 
     def clear(self):
-        pass
+        while not self.is_empty():
+            self.pop()
 
     def display(self):
         print(self)
@@ -68,9 +114,9 @@ class SLinkedList:
         else:
             result = "head: "
             current = self.__head
-            while current.next is not None:
-                result = result + str(current) + " -> "
-                current = current.next
-            result += str(current)
+            while current.get_next() is not None:
+                result = result + str(current.get_data()) + " -> "
+                current = current.get_next()
+            result += str(current.get_data())
             return result
 
