@@ -14,10 +14,16 @@ class Stack:
         self.__elements.append(new)
 
     def pop(self):
-        return None if self.is_empty() else self.__elements.pop()
+        if self.is_empty():
+            return None
+        else:
+            return self.__elements.pop()
 
     def peek(self):
-        return None if self.is_empty() else self.__elements[-1]
+        if self.is_empty():
+            return None
+        else:
+            return self.__elements[-1]
 
     def clear(self):
         self.__elements = []    # or keep popping
