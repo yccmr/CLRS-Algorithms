@@ -71,12 +71,12 @@ class MaxHeap:
     def is_empty(self):
         return self.__heap_size == 0
 
-    def is_in_heap(self, target):
-        """ Return True if target is in the heap, or False otherwise """
-        for item in self.__max_heap:
-            if item == target:
-                return True
-        return False
+    def search(self, target):
+        """ Return the index of the target in the heap. Return -1 if it doesn't exist """
+        for i in range(self.__heap_size):
+            if target == self.__max_heap[i]:
+                return i
+        return -1
 
     def find_max(self):
         """ Return the max element in the heap """
@@ -91,20 +91,54 @@ class MaxHeap:
             return None
         else:
             self.__max_heap[0], self.__max_heap[self.__heap_size-1] = self.__max_heap[self.__heap_size-1], self.__max_heap[0]
-            removed = self.__max_heap.pop()
+            max_element = self.__max_heap.pop()
             self.__heap_size -= 1
             self.max_heapify(0, self.__heap_size)
-            return removed
+            return max_element
+
+    def increase(self, target, new_key):
+        """
+        Increase the key of the target (if it exists) to new_key
+        Not implemented - the way to change key is unknown
+        """
+        pass
+
+    def decrease(self, target, new_key):
+        """
+        Increase the key of the target (if it exists) to new_key
+        Not implemented - the way to change key is unknown
+        """
+        pass
 
     def insert(self, new):
-        """ Insert the new data into an appropriate position s.t. the max heap structure is maintained """
+        """
+        Insert the new data to an appropriate position s.t. the max heap structure is maintained - based on increase()
+        Not implemented - the way to change key is unknown
+        """
         pass
 
     def delete(self, target):
         """ Delete target from the heap (if it exists) and maintain the max heap structure """
-        pass
+        index = self.search(target)
+        if index == -1:
+            return
+        else:
+            self.__max_heap[index], self.__max_heap[self.__heap_size-1] = self.__max_heap[self.__heap_size-1], self.__max_heap[index]
+            self.__max_heap.pop()
+            self.__heap_size -= 1
+            self.max_heapify(index, self.__heap_size)
 
-    def __str__(self):
-        pass
+    def display(self):
+        print(self)
+
+    def __str__(self):     # the ideal way is to draw heap as a tree...
+        if self.is_empty():
+            return "(empty)"
+        else:
+            result = "["
+            for i in range(self.__heap_size-1):
+                result = result + str(self.__max_heap[i]) + ", "
+            result = result + str(self.__max_heap[self.__heap_size-1]) + "]"
+            return result
 
 
