@@ -1,5 +1,5 @@
 # Implementation of max heap
-# Assume all keys are distinct, and all parameters are used appropriately
+# Assume all keys are distinct, and all parameters are used properly
 
 def is_max_heap(arr, arr_size, root_index):
     if root_index >= arr_size:
