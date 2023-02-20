@@ -51,7 +51,7 @@ class MaxHeap:
 
     def build_max_heap(self):
         """ Build a heap from a random arr """
-        for root_index in range(self.__get_parent(self.__heap_size), -1, -1):
+        for root_index in range(self.__get_parent(self.__heap_size-1), -1, -1):
             self.max_heapify(root_index)
 
     def heap_sort(self):
