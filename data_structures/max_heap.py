@@ -128,6 +128,10 @@ class MaxHeap:
             self.__heap_size -= 1
             self.max_heapify(index, self.__heap_size)
 
+    def clear(self):
+        self.__max_heap = []
+        self.__heap_size = 0
+
     def display(self):
         print(self)
 
