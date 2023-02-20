@@ -72,6 +72,10 @@ class DLinkedList:
             self.__tail = new_node
         self.__length += 1
 
+    def insert(self, new_data):
+        """ Not implemented - the anticipated effect after the insertion is unknown, e.g. non-decreasing """
+        pass
+
     def remove(self, target_data):
         """ Remove the target data from the list, do nothing if it doesn't exist """
         index = self.search(target_data)
