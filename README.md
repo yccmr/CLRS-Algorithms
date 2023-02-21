@@ -1,4 +1,4 @@
-# Algorithms
+# CLRS-Algorithms
 
 Consists of algorithms and data structures implemented in Python, most of which are covered in the algorithm courses from the University of Alberta (CMPUT 175, 204 and 304), which are all essentially constructed based on CLRS (Introduction To Algorithms).
 
