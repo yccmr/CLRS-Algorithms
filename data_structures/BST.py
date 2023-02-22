@@ -54,9 +54,14 @@ class BST:
         pass
 
     def insert(self, target):
+        """ Insert target into the BST (if it doesn't exist) s.t. the BST property is maintained """
         pass
 
     def delete(self, target):
+        """ Delete target from the BST (if it exists) s.t. the BST property is maintained """
+        pass
+
+    def __str__(self):
         pass
 
 
