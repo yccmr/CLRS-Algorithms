@@ -15,7 +15,7 @@ def general_get_min(root):
     pass
 
 
-class Node:
+class BSTNode:
     def __init__(self, data, left=None, right=None):
         self.__data = data
         self.__left = left

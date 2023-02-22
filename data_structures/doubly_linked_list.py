@@ -1,6 +1,6 @@
 # Implementation of doubly linked list
 
-class Node:
+class DNode:
     def __init__(self, init_data, init_next=None, init_prev=None):
         self.__data = init_data
         self.__next = init_next
@@ -50,7 +50,7 @@ class DLinkedList:
 
     def add(self, new_data):
         """ Add new_data at the head of the list """
-        new_node = Node(new_data)
+        new_node = DNode(new_data)
         if self.is_empty():
             self.__head = new_node
             self.__tail = new_node
@@ -62,7 +62,7 @@ class DLinkedList:
 
     def append(self, new_data):
         """ Append new_data to the end of the list """
-        new_node = Node(new_data)
+        new_node = DNode(new_data)
         if self.is_empty():
             self.__head = new_node
             self.__tail = new_node
