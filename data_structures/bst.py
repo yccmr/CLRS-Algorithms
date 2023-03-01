@@ -44,20 +44,38 @@ class BST:
     def __init__(self, root=None):
         self.__root = root
 
-    def is_found(self, target):
-        pass
+    def is_found(self, root, target):
+        if root is None:
+            return False
+        else:
+            if root.get_data() == target:
+                return True
+            elif root.get_data() < target:
+                return self.is_found(root.get_right(), target)
+            else:
+                return self.is_found(root.get_left(), target)
 
-    def get_max(self):
-        pass
+    def get_max(self, root):
+        if root is None:
+            return None
+        if root.get_right() is None:
+            return root.get_data()
+        else:
+            return self.get_max(root.get_right())
 
-    def get_min(self):
-        pass
+    def get_min(self, root):
+        if root is None:
+            return None
+        if root.get_left() is None:
+            return root.get_data()
+        else:
+            return self.get_min(root.get_left())
 
-    def insert(self, target):
+    def insert(self, root, target):
         """ Insert target into the BST (if it doesn't exist) s.t. the BST property is maintained """
         pass
 
-    def delete(self, target):
+    def delete(self, root, target):
         """ Delete target from the BST (if it exists) s.t. the BST property is maintained """
         pass
 
