@@ -1,8 +1,21 @@
 # Implementation of BST
 
-def is_BST(root):
+def is_bst(root):
     """ Return true if the binary tree rooted at `root` is a BST """
-    pass
+    if root is None:
+        return True
+    if root.get_left() is None and root.get_right() is None:
+        return True
+    elif root.get_left() is None and root.get_right() is not None:
+        if root.get_data() < general_get_min(root):
+            return is_bst(root.get_right())
+    elif root.get_left() is not None and root.get_right() is None:
+        if root.get_data() > general_get_max(root):
+            return is_bst(root.get_left())
+    else:
+        if root.get_data() < general_get_min(root) and root.get_data() > general_get_max(root):
+            return is_bst(root.get_left()) and is_bst(root.get_right())
+    return False
 
 
 def general_get_max(root):
@@ -44,8 +57,11 @@ class BST:
     def __init__(self, root=None):
         self.__root = root
 
+    def is_empty(self):
+        return self.__root is None
+
     def is_found(self, root, target):
-        if root is None:
+        if self.is_empty():
             return False
         else:
             if root.get_data() == target:
@@ -56,7 +72,7 @@ class BST:
                 return self.is_found(root.get_left(), target)
 
     def get_max(self, root):
-        if root is None:
+        if self.is_empty():
             return None
         if root.get_right() is None:
             return root.get_data()
@@ -64,16 +80,28 @@ class BST:
             return self.get_max(root.get_right())
 
     def get_min(self, root):
-        if root is None:
+        if self.is_empty():
             return None
         if root.get_left() is None:
             return root.get_data()
         else:
             return self.get_min(root.get_left())
 
-    def insert(self, root, target):
+    def insert(self, root, new):
         """ Insert target into the BST (if it doesn't exist) s.t. the BST property is maintained """
-        pass
+        if self.is_found(root, new):
+            return
+        if self.is_empty():
+            self.__root = BSTNode(new)
+        else:
+            if root.get_left() is None and new < root.get_data():
+                root.set_left(BSTNode(new))
+            elif root.get_right() is None and new > root.get_data():
+                root.set_right(BSTNode(new))
+            elif new < root.get_data():
+                self.insert(root.get_left(), new)
+            elif new > root.get_data():
+                self.insert(root.get_right(), new)
 
     def delete(self, root, target):
         """ Delete target from the BST (if it exists) s.t. the BST property is maintained """
