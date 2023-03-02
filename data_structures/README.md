@@ -4,3 +4,4 @@
 - queue
 - singly & doubly linked list
 - max heap
+- binary search tree (BST)
