@@ -7,25 +7,43 @@ def is_bst(root):
     if root.get_left() is None and root.get_right() is None:
         return True
     elif root.get_left() is None and root.get_right() is not None:
-        if root.get_data() < general_get_min(root):
+        if root.get_data() < general_get_min(root.get_right()):
             return is_bst(root.get_right())
     elif root.get_left() is not None and root.get_right() is None:
-        if root.get_data() > general_get_max(root):
+        if root.get_data() > general_get_max(root.get_left()):
             return is_bst(root.get_left())
     else:
-        if root.get_data() < general_get_min(root) and root.get_data() > general_get_max(root):
+        if root.get_data() < general_get_min(root.get_right()) and root.get_data() > general_get_max(root.get_left()):
             return is_bst(root.get_left()) and is_bst(root.get_right())
     return False
 
 
 def general_get_max(root):
     """ Find the max element in the binary tree rooted at `root` """
-    pass
+    if root is None:
+        return None
+    if root.get_left() is None and root.get_right() is None:
+        return root.get_data()
+    elif root.get_left() is None and root.get_right() is not None:
+        return max(root.get_key(), general_get_max(root.get_right()))
+    elif root.get_left() is not None and root.get_right() is None:
+        return max(root.get_key(), general_get_max(root.get_left()))
+    else:
+        return max(root.get_key(), general_get_max(root.get_left()), general_get_max(root.get_right()))
 
 
 def general_get_min(root):
     """ Find the min element in the binary tree rooted at `root` """
-    pass
+    if root is None:
+        return None
+    if root.get_left() is None and root.get_right() is None:
+        return root.get_data()
+    elif root.get_left() is None and root.get_right() is not None:
+        return min(root.get_key(), general_get_max(root.get_right()))
+    elif root.get_left() is not None and root.get_right() is None:
+        return min(root.get_key(), general_get_max(root.get_left()))
+    else:
+        return min(root.get_key(), general_get_max(root.get_left()), general_get_max(root.get_right()))
 
 
 class BSTNode:
@@ -89,10 +107,10 @@ class BST:
 
     def insert(self, root, new):
         """ Insert target into the BST (if it doesn't exist) s.t. the BST property is maintained """
-        if self.is_found(root, new):
-            return
         if self.is_empty():
             self.__root = BSTNode(new)
+        if self.is_found(root, new):
+            return
         else:
             if root.get_left() is None and new < root.get_data():
                 root.set_left(BSTNode(new))
@@ -104,10 +122,26 @@ class BST:
                 self.insert(root.get_right(), new)
 
     def delete(self, root, target):
-        """ Delete target from the BST (if it exists) s.t. the BST property is maintained """
-        pass
+        """ Delete target from the BST (if it exists) s.t. the BST property is maintained, and return the new root """
+        if self.is_empty() or not self.is_found(root, target):
+            return root
+        else:
+            if root.get_key() < target:
+                root.set_right(self.delete(root.get_right(), target))
+            elif root.get_key() > target:
+                root.set_left(self.delete(root.get_left(), target))
+            else:
+                if root.get_left() is None and root.get_right() is None:     # no child
+                    return None
+                elif root.get_left() is None and root.get_right() is not None:     # one right child
+                    return root.get_right()
+                elif root.get_left() is not None and root.get_right() is None:     # one left child
+                    return root.get_left()
+                else:     # two children
+                    root.set_data(self.get_max(root.get_left()))
+                    root.set_left(self.delete(root.get_left(), target))
+                    return root
 
     def __str__(self):
         pass
-
 
