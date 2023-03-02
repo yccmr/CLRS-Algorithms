@@ -1,4 +1,5 @@
 # Implementation of BST
+# Assume all keys are distinct
 
 def is_bst(root):
     """ Return true if the binary tree rooted at `root` is a BST """
@@ -75,6 +76,9 @@ class BST:
     def __init__(self, root=None):
         self.__root = root
 
+    def get_root(self):
+        return self.__root
+
     def is_empty(self):
         return self.__root is None
 
@@ -144,4 +148,5 @@ class BST:
 
     def __str__(self):
         pass
+
 
