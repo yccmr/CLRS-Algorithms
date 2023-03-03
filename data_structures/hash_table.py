@@ -1,9 +1,22 @@
 # Implementation of hash table
 
+class Item:
+    def __init__(self, key):
+        self.__key = key
+
+    def get_key(self):
+        return self.__key
+
+    def __str__(self):
+        return str(self.__key)
+
+
 class HashTable:
     def __init__(self, size=10):
         self.__size = size
-        self.__table = [[]] * self.__size
+        self.__table = []
+        for i in range(size):
+            self.__table.append([])
 
     def hash_map(self, key):
         return key % self.__size
@@ -25,9 +38,19 @@ class HashTable:
         result = ''
         for i in range(self.__size):
             result += "[{}]: ".format(i)
+            if self.__table[i] == []:
+                result += "(empty)\n"
+                continue
             for j in range(len(self.__table[i])-1):
                 result = result + str(self.__table[i][j]) + " -> "
             result = result + str(self.__table[i][-1]) + '\n'
         return result
+
+
+if __name__ == "__main__":
+    ht = HashTable(10)
+    for i in range(101):
+        ht.insert(Item(i))
+    print(ht)
 
 
