@@ -1,4 +1,5 @@
 # Implementation of hash table
+# Not as flexible as the other data structures... due to get_key()
 
 class Item:
     def __init__(self, key):
@@ -22,10 +23,10 @@ class HashTable:
         return key % self.__size
 
     def is_found(self, target):
-        hash_value = self.hash_map(target.get_key())      # get_key() may vary
+        hash_value = self.hash_map(target.get_key())
         return target in self.__table[hash_value]
 
-    # insert and delete is minimally implemented
+    # insert and delete are minimally implemented
     def insert(self, new):
         hash_value = self.hash_map(new.get_key())
         self.__table[hash_value].append(new)
