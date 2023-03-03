@@ -1,5 +1,5 @@
 # Implementation of hash table
-# Not as flexible as the other data structures... due to get_key()
+# This implementation isn't as flexible as the other ones... due to get_key(). The others only compare keys
 
 class Item:
     def __init__(self, key):
