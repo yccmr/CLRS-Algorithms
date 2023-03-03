@@ -14,10 +14,12 @@ The ones from CMPUT 175 and 204 will hopefully be done by Septemeber 2023, while
 
 
 
-#### Data Structures (on-going):
+#### Data Structures (done except for AVL tree):
 
 - stack 
 - queue
 - singly & doubly linked list
 - max heap
 - binary search tree (BST)
+- AVL tree - to do
+- hash table
