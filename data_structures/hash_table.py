@@ -3,48 +3,45 @@
 
 class Item:
     def __init__(self, key):
-        self.__key = key
-
-    def get_key(self):
-        return self.__key
+        self.key = key
 
     def __str__(self):
-        return str(self.__key)
+        return str(self.key)
 
 
 class HashTable:
     def __init__(self, size=10):
-        self.__size = size
-        self.__table = []
+        self.size = size
+        self.table = []
         for i in range(size):
-            self.__table.append([])
+            self.table.append([])
 
     def hash_map(self, key):
-        return key % self.__size
+        return key % self.size
 
     def is_found(self, target):
-        hash_value = self.hash_map(target.get_key())
-        return target in self.__table[hash_value]
+        hash_value = self.hash_map(target.key)
+        return target in self.table[hash_value]
 
     # insert and delete are minimally implemented
     def insert(self, new):
-        hash_value = self.hash_map(new.get_key())
-        self.__table[hash_value].append(new)
+        hash_value = self.hash_map(new.key)
+        self.table[hash_value].append(new)
 
     def delete(self, target):
-        hash_value = self.hash_map(target.get_key())
-        self.__table[hash_value].remove(target)
+        hash_value = self.hash_map(target.key)
+        self.table[hash_value].remove(target)
 
     def __str__(self):
         result = ''
-        for i in range(self.__size):
+        for i in range(self.size):
             result += "[{}]: ".format(i)
-            if self.__table[i] == []:
+            if self.table[i] == []:
                 result += "(empty)\n"
                 continue
-            for j in range(len(self.__table[i])-1):
-                result = result + str(self.__table[i][j]) + " -> "
-            result = result + str(self.__table[i][-1]) + '\n'
+            for j in range(len(self.table[i])-1):
+                result = result + str(self.table[i][j]) + " -> "
+            result = result + str(self.table[i][-1]) + '\n'
         return result
 
 

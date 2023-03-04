@@ -1,102 +1,87 @@
 # Implementation of singly linked list
 
 class SNode:
-    def __init__(self, init_data, init_next=None):
-        self.__data = init_data
-        self.__next = init_next
-
-    def get_data(self):
-        return self.__data
-
-    def set_data(self, new_data):
-        self.__data = new_data
-
-    def get_next(self):
-        return self.__next
-
-    def set_next(self, new_next):
-        self.__next = new_next
+    def __init__(self, init_key, init_next=None):
+        self.key = init_key
+        self.next = init_next
 
 
 class SLinkedList:
     def __init__(self, head=None):
-        self.__head = head
-        self.__length = 0
+        self.head = head
+        self.length = 0
 
     def is_empty(self):
-        return self.__length == 0
+        return self.length == 0
 
-    def length(self):
-        return self.__length
-
-    def search(self, target_data):
-        """ Return the index of the target_data, return -1 if it doesn't exist """
+    def search(self, target_key):
+        """ Return the index of the target_key, return -1 if it doesn't exist """
         index = 0
-        current = self.__head
+        current = self.head
         while current is not None:
-            if current.get_data() == target_data:
+            if current.key == target_key:
                 return index
-            current = current.get_next()
+            current = current.next
             index += 1
         return -1
 
-    def add(self, new_data):
-        """ Add new_data at the head of the list """
-        new_node = SNode(new_data)
+    def add(self, new_key):
+        """ Add new_key at the head of the list """
+        new_node = SNode(new_key)
         if self.is_empty():
-            self.__head = new_node
+            self.head = new_node
         else:
-            new_node.set_next(self.__head)
-            self.__head = new_node
-        self.__length += 1
+            new_node.next = self.head
+            self.head = new_node
+        self.length += 1
 
-    def append(self, new_data):
-        """ Append new_data to the end of the list """
-        new_node = SNode(new_data)
+    def append(self, new_key):
+        """ Append new_key to the end of the list """
+        new_node = SNode(new_key)
         if self.is_empty():
-            self.__head = new_node
+            self.head = new_node
         else:
-            current = self.__head
-            while current.get_next() is not None:
-                current = current.get_next()
-            current.set_next(new_node)
-        self.__length += 1
+            current = self.head
+            while current.next is not None:
+                current = current.next
+            current.next = new_node
+        self.length += 1
 
-    def insert(self, new_data):
+    def insert(self, new_key):
         """ Not implemented - the anticipated effect after the insertion is unknown, e.g. non-decreasing """
         pass
 
-    def remove(self, target_data):
-        """ Remove the target data from the list, do nothing if it doesn't exist """
-        index = self.search(target_data)
+    def remove(self, target_key):
+        """ Remove the target key from the list, do nothing if it doesn't exist """
+        index = self.search(target_key)
         if index == -1:
             return
 
         if index == 0:
-            self.__head = self.__head.get_next()
+            self.head = self.head.next
         else:
-            current = self.__head
+            current = self.head
             for i in range(index-1):
-                current = current.get_next()
-            current.set_next(current.get_next().get_next())
-        self.__length -= 1
+                current = current.next
+            current.next = current.next.next
+        self.length -= 1
 
     def pop(self):
         """ Remove and return the last element from the list """
         if self.is_empty():
             return None
 
-        removed_data = None
-        if self.__length == 1:
-            removed_data = self.__head.get_data()
-            self.__head = None
+        removed_key = None
+        if self.length == 1:
+            removed_key = self.head.key
+            self.head = None
         else:
-            current = self.__head
-            while current.get_next() is not None:
-                current = current.get_next()
-            removed_data = current.get_data()
-        self.__length -= 1
-        return removed_data
+            current = self.head
+            while current.next is not None:
+                current = current.next
+            removed_key = current.key
+        self.length -= 1
+        return removed_key
 
     def clear(self):
         while not self.is_empty():
@@ -110,11 +95,11 @@ class SLinkedList:
             return "(empty)"
         else:
             result = "head: "
-            current = self.__head
-            while current.get_next() is not None:
-                result = result + str(current.get_data()) + " -> "
-                current = current.get_next()
-            result += str(current.get_data())
+            current = self.head
+            while current.next is not None:
+                result = result + str(current.key) + " -> "
+                current = current.next
+            result += str(current.key)
             return result
 
 

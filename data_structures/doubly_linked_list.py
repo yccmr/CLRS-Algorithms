@@ -1,120 +1,99 @@
 # Implementation of doubly linked list
 
 class DNode:
-    def __init__(self, init_data, init_next=None, init_prev=None):
-        self.__data = init_data
-        self.__next = init_next
-        self.__prev = init_prev
-
-    def get_data(self):
-        return self.__data
-
-    def set_data(self, new_data):
-        self.__data = new_data
-
-    def get_next(self):
-        return self.__next
-
-    def set_next(self, new_next):
-        self.__next = new_next
-
-    def get_prev(self):
-        return self.__prev
-
-    def set_prev(self, new_prev):
-        self.__prev = new_prev
+    def __init__(self, init_key, init_next=None, init_prev=None):
+        self.key = init_key
+        self.next = init_next
+        self.prev = init_prev
 
 
 class DLinkedList:
     def __init__(self, head=None, tail=None):
-        self.__head = head
-        self.__tail = tail
-        self.__length = 0
+        self.head = head
+        self.tail = tail
+        self.length = 0
 
     def is_empty(self):
-        return self.__length == 0
+        return self.length == 0
 
-    def length(self):
-        return self.__length
-
-    def search(self, target_data):
-        """ Return the index of the target_data, return -1 if it doesn't exist """
+    def search(self, target_key):
+        """ Return the index of the target_key, return -1 if it doesn't exist """
         index = 0
-        current = self.__head
+        current = self.head
         while current is not None:
-            if current.get_data() == target_data:
+            if current.key == target_key:
                 return index
-            current = current.get_next()
+            current = current.next
             index += 1
         return -1
 
-    def add(self, new_data):
-        """ Add new_data at the head of the list """
-        new_node = DNode(new_data)
+    def add(self, new_key):
+        """ Add new_key at the head of the list """
+        new_node = DNode(new_key)
         if self.is_empty():
-            self.__head = new_node
-            self.__tail = new_node
+            self.head = new_node
+            self.tail = new_node
         else:
-            new_node.set_next(self.__head)
-            self.__head.set_prev(new_node)
-            self.__head = new_node
-        self.__length += 1
+            new_node.next = self.head
+            self.head.prev = new_node
+            self.head = new_node
+        self.length += 1
 
-    def append(self, new_data):
-        """ Append new_data to the end of the list """
-        new_node = DNode(new_data)
+    def append(self, new_key):
+        """ Append new_key to the end of the list """
+        new_node = DNode(new_key)
         if self.is_empty():
-            self.__head = new_node
-            self.__tail = new_node
+            self.head = new_node
+            self.tail = new_node
         else:
-            self.__tail.set_next(new_node)
-            new_node.set_prev(self.__tail)
-            self.__tail = new_node
-        self.__length += 1
+            self.tail.next = new_node
+            new_node.prev = self.tail
+            self.tail = new_node
+        self.length += 1
 
-    def insert(self, new_data):
+    def insert(self, new_key):
         """ Not implemented - the anticipated effect after the insertion is unknown, e.g. non-decreasing """
         pass
 
-    def remove(self, target_data):
-        """ Remove the target data from the list, do nothing if it doesn't exist """
-        index = self.search(target_data)
+    def remove(self, target_key):
+        """ Remove the target key from the list, do nothing if it doesn't exist """
+        index = self.search(target_key)
         if index == -1:
             return
 
-        if self.__length == 1:
-            self.__head = None
-            self.__tail = None
+        if self.length == 1:
+            self.head = None
+            self.tail = None
         elif index == 0:
-            self.__head.get_next().set_prev(None)
-            self.__head = self.__head.get_next()
-        elif index == self.__length-1:
-            self.__tail.get_prev().set_next(None)
-            self.__tail = self.__tail.get_prev()
+            self.head.next.prev = None
+            self.head = self.head.next
+        elif index == self.length-1:
+            self.tail.prev.next = None
+            self.tail = self.tail.prev
         else:    # in the middle
-            current = self.__head
+            current = self.head
             for i in range(index):
-                current = current.get_next()
-            current.get_next().set_prev(current.get_prev())
-            current.get_prev().set_next(current.get_next())
-        self.__length -= 1
+                current = current.next
+            current.next.prev = current.prev
+            current.prev.next = current.next
+        self.length -= 1
 
     def pop(self):
         """ Remove and return the last element from the list """
         if self.is_empty():
             return None
 
-        removed_data = None
-        if self.__length == 1:
-            removed_data = self.__head.get_data()
-            self.__head = None
-            self.__tail = None
+        removed_key = None
+        if self.length == 1:
+            removed_key = self.head.key
+            self.head = None
+            self.tail = None
         else:
-            removed_data = self.__tail.get_data()
-            self.__tail.get_prev().set_next(None)
-            self.__tail = self.__tail.get_prev()
-        self.__length -= 1
-        return removed_data
+            removed_key = self.tail.key
+            self.tail.prev.next = None
+            self.tail = self.tail.prev
+        self.length -= 1
+        return removed_key
 
     def clear(self):
         while not self.is_empty():
@@ -128,18 +107,18 @@ class DLinkedList:
             return "(empty)"
         else:
             result = "head: "
-            current = self.__head
-            while current.get_next() is not None:
-                result = result + str(current.get_data()) + " -> "
-                current = current.get_next()
-            result = result + str(current.get_data()) + " :tail\n"
+            current = self.head
+            while current.next is not None:
+                result = result + str(current.key) + " -> "
+                current = current.next
+            result = result + str(current.key) + " :tail\n"
 
             result += "tail: "
-            current = self.__tail
-            while current.get_prev() is not None:
-                result = result + str(current.get_data()) + " -> "
-                current = current.get_prev()
-            result = result + str(current.get_data()) + " :head"
+            current = self.tail
+            while current.prev is not None:
+                result = result + str(current.key) + " -> "
+                current = current.prev
+            result = result + str(current.key) + " :head"
             return result
 
 

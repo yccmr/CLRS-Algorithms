@@ -2,31 +2,31 @@
 
 class Stack:
     def __init__(self):
-        self.__elements = []
+        self.elements = []
 
     def is_empty(self):
-        return self.__elements == []
+        return self.elements == []
 
     def size(self):
-        return len(self.__elements)	
+        return len(self.elements)
 
     def push(self, new):
-        self.__elements.append(new)
+        self.elements.append(new)
 
     def pop(self):
         if self.is_empty():
             return None
         else:
-            return self.__elements.pop()
+            return self.elements.pop()
 
     def peek(self):
         if self.is_empty():
             return None
         else:
-            return self.__elements[-1]
+            return self.elements[-1]
 
     def clear(self):
-        self.__elements = []    # or keep popping
+        self.elements = []    # or keep popping
 
     def display(self):
         print(self)
@@ -36,8 +36,8 @@ class Stack:
             return "(empty)"
         else:
             result = "bottom <- "
-            for i in range(len(self.__elements)):
-                result = result + str(self.__elements[i]) + " "
+            for i in range(len(self.elements)):
+                result = result + str(self.elements[i]) + " "
             return result
 
 

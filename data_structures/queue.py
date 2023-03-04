@@ -2,25 +2,25 @@
 
 class Queue:
     def __init__(self):
-        self.__elements = []
+        self.elements = []
 
     def is_empty(self):
-        return self.__elements == []
+        return self.elements == []
 
     def size(self):
-        return len(self.__elements)
+        return len(self.elements)
 
     def enqueue(self, new):
-        self.__elements.append(new)
+        self.elements.append(new)
 
     def dequeue(self):
         if self.is_empty():
             return None
         else:
-            return self.__elements.pop(0)
+            return self.elements.pop(0)
 
     def clear(self):
-        self.__elements = []     # or keep dequeue-ing
+        self.elements = []     # or keep dequeue-ing
 
     def display(self):
         print(self)
@@ -30,8 +30,8 @@ class Queue:
             return "(empty)"
         else:
             result = "head -> "
-            for i in range(len(self.__elements)):
-                result = result + str(self.__elements[i]) + " "
+            for i in range(len(self.elements)):
+                result = result + str(self.elements[i]) + " "
             result += "<- tail"
             return result
 

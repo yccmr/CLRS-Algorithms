@@ -17,15 +17,15 @@ def is_max_heap(arr, arr_size, root_index):
 
 class MaxHeap:
     def __init__(self, arr):
-        self.__max_heap = arr
-        self.__heap_size = len(arr)
+        self.max_heap = arr
+        self.heap_size = len(arr)
         self.build_max_heap()
 
     def __getitem__(self, index):
-        return self.__max_heap[index]
+        return self.max_heap[index]
 
     def __len__(self):
-        return len(self.__max_heap)
+        return len(self.max_heap)
 
     def __get_left_child(self, root_index):
         """ Return the left child index given the root index """
@@ -40,7 +40,7 @@ class MaxHeap:
         return (root_index - 1) // 2
 
     def get_heap_size(self):
-        return self.__heap_size
+        return self.heap_size
 
     def max_heapify(self, root_index, heap_size):
         """ Change an almost max heap into a max heap """
@@ -48,33 +48,33 @@ class MaxHeap:
         rc = self.__get_right_child(root_index)
         max_index = root_index
 
-        if lc < heap_size and self.__max_heap[lc] > self.__max_heap[max_index]:
+        if lc < heap_size and self.max_heap[lc] > self.max_heap[max_index]:
             max_index = lc
-        if rc < heap_size and self.__max_heap[rc] > self.__max_heap[max_index]:
+        if rc < heap_size and self.max_heap[rc] > self.max_heap[max_index]:
             max_index = rc
         if max_index != root_index:
-            self.__max_heap[root_index], self.__max_heap[max_index] = self.__max_heap[max_index], self.__max_heap[root_index]
+            self.max_heap[root_index], self.max_heap[max_index] = self.max_heap[max_index], self.max_heap[root_index]
             self.max_heapify(max_index, heap_size)
 
     def build_max_heap(self):
         """ Build a heap from a random arr """
-        for root_index in range(self.__get_parent(self.__heap_size-1), -1, -1):
-            self.max_heapify(root_index, self.__heap_size)
+        for root_index in range(self.__get_parent(self.heap_size-1), -1, -1):
+            self.max_heapify(root_index, self.heap_size)
 
     def heap_sort(self):
         """ Sort into non-decreasing order """
         self.build_max_heap()
-        for i in range(self.__heap_size-1, 0, -1):
-            self.__max_heap[0], self.__max_heap[i] = self.__max_heap[i], self.__max_heap[0]
+        for i in range(self.heap_size-1, 0, -1):
+            self.max_heap[0], self.max_heap[i] = self.max_heap[i], self.max_heap[0]
             self.max_heapify(0, i)
 
     def is_empty(self):
-        return self.__heap_size == 0
+        return self.heap_size == 0
 
     def search(self, target):
         """ Return the index of the target in the heap. Return -1 if it doesn't exist """
-        for i in range(self.__heap_size):
-            if target == self.__max_heap[i]:
+        for i in range(self.heap_size):
+            if target == self.max_heap[i]:
                 return i
         return -1
 
@@ -83,17 +83,17 @@ class MaxHeap:
         if self.is_empty():
             return None
         else:
-            return self.__max_heap[0]
+            return self.max_heap[0]
 
     def extract_max(self):
         """ Return and remove the max element from the heap """
         if self.is_empty():
             return None
         else:
-            self.__max_heap[0], self.__max_heap[self.__heap_size-1] = self.__max_heap[self.__heap_size-1], self.__max_heap[0]
-            max_element = self.__max_heap.pop()
-            self.__heap_size -= 1
-            self.max_heapify(0, self.__heap_size)
+            self.max_heap[0], self.max_heap[self.heap_size-1] = self.max_heap[self.heap_size-1], self.max_heap[0]
+            max_element = self.max_heap.pop()
+            self.heap_size -= 1
+            self.max_heapify(0, self.heap_size)
             return max_element
 
     def increase(self, target, new_key):
@@ -123,14 +123,14 @@ class MaxHeap:
         if index == -1:
             return
         else:
-            self.__max_heap[index], self.__max_heap[self.__heap_size-1] = self.__max_heap[self.__heap_size-1], self.__max_heap[index]
-            self.__max_heap.pop()
-            self.__heap_size -= 1
-            self.max_heapify(index, self.__heap_size)
+            self.max_heap[index], self.max_heap[self.heap_size-1] = self.max_heap[self.heap_size-1], self.max_heap[index]
+            self.max_heap.pop()
+            self.heap_size -= 1
+            self.max_heapify(index, self.heap_size)
 
     def clear(self):
-        self.__max_heap = []
-        self.__heap_size = 0
+        self.max_heap = []
+        self.heap_size = 0
 
     def display(self):
         print(self)
@@ -140,9 +140,9 @@ class MaxHeap:
             return "(empty)"
         else:
             result = "["
-            for i in range(self.__heap_size-1):
-                result = result + str(self.__max_heap[i]) + ", "
-            result = result + str(self.__max_heap[self.__heap_size-1]) + "]"
+            for i in range(self.heap_size-1):
+                result = result + str(self.max_heap[i]) + ", "
+            result = result + str(self.max_heap[self.heap_size-1]) + "]"
             return result
 
 
