@@ -27,15 +27,15 @@ class MaxHeap:
     def __len__(self):
         return len(self.max_heap)
 
-    def __get_left_child(self, root_index):
+    def get_left_child(self, root_index):
         """ Return the left child index given the root index """
         return 2 * root_index + 1
 
-    def __get_right_child(self, root_index):
+    def get_right_child(self, root_index):
         """ Return the right child index given the root index """
         return 2 * root_index + 2
 
-    def __get_parent(self, root_index):
+    def get_parent(self, root_index):
         """ Return the parent index given the root index """
         return (root_index - 1) // 2
 
@@ -44,8 +44,8 @@ class MaxHeap:
 
     def max_heapify(self, root_index, heap_size):
         """ Change an almost max heap into a max heap """
-        lc = self.__get_left_child(root_index)
-        rc = self.__get_right_child(root_index)
+        lc = self.get_left_child(root_index)
+        rc = self.get_right_child(root_index)
         max_index = root_index
 
         if lc < heap_size and self.max_heap[lc] > self.max_heap[max_index]:
@@ -58,7 +58,7 @@ class MaxHeap:
 
     def build_max_heap(self):
         """ Build a heap from a random arr """
-        for root_index in range(self.__get_parent(self.heap_size-1), -1, -1):
+        for root_index in range(self.get_parent(self.heap_size-1), -1, -1):
             self.max_heapify(root_index, self.heap_size)
 
     def heap_sort(self):
